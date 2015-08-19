@@ -1,0 +1,7 @@
+---
+name: bosh-init
+
+dependencies: {}
+
+files:
+- resources/bosh-init-deployment-resource.tar.gz

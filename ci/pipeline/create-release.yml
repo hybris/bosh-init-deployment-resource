@@ -3,17 +3,31 @@ jobs:
   serial: true
   public: true
   plan:
-  - get: bosh-init-deployment-resource
+  - get: release
     trigger: true
   - task: unit
-    file: bosh-init-deployment-resource/build.yml
-
+    file: release/build.yml
+  - put: resource-image
+    params: {build: bosh-init-deployment-resource}
+    get_params: {rootfs: true}
+  - task: bump-package
+    file: release/ci/tasks/bump-resource-package.yml
+    config: {params: {RESOURCE_NAME: bosh-init-deployment-resource}}
+  - put: release
+    params: {repository: bump-package/concourse, rebase: true}
 
 
 resources:
-- name: bosh-init-deployment-resource
+- name: release
   type: git
   source:
     uri: git@github.com:hybris/bosh-init-deployment-resource.git
     branch: master
     private_key: {{hybris-repo-private-key}}
+- name: resource-image
+  type: docker-image
+  source:
+    username: {{docker-username}}
+    email: {{docker-email}}
+    password: {{docker-password}}
+    repository: joekhybris/bosh-init-deployment-resource
