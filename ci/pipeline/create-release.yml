@@ -1,0 +1,19 @@
+jobs:
+- name: bosh-init-deployment-resource
+  serial: true
+  public: true
+  plan:
+  - get: bosh-init-deployment-resource
+    trigger: true
+  - task: unit
+    file: bosh-init-deployment-resource/build.yml
+
+
+
+resources:
+- name: bosh-init-deployment-resource
+  type: git
+  source:
+    uri: git@github.com:hybris/bosh-init-deployment-resource.git
+    branch: master
+    private_key: {{hybris-repo-private-key}}
