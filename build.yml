@@ -4,7 +4,7 @@ platform: linux
 image: docker:///ruby#2.1
 
 inputs:
-- name: bosh-deployment-resource
+- name: bosh-init-deployment-resource
   path: .
 
 run:
