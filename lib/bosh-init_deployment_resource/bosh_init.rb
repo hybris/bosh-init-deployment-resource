@@ -28,9 +28,6 @@ module BoshInitDeploymentResource
       end
 
       FileUtils.cp(manifest_path, "#{@env_path}/manifest.yml")
-    rescue
-      FileUtils.remove_entry dir
-      exit 1
     end
 
     def cleanup_environment
