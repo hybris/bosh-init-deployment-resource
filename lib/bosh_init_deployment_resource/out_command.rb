@@ -23,12 +23,11 @@ module BoshInitDeploymentResource
     private
 
     def validate!(request)
-      ['access_key_id', 'secret_access_key', 'bucket_name', 'region']
-        .each do |field|
+      %w(access_key_id secret_access_key bucket_name region).each do |field|
         request.fetch('source').fetch(field)
       end
 
-      ['stats_file_key', 'manifest_file'].each do |field|
+      %w(stats_file_key manifest_file).each do |field|
         request.fetch('params')
           .fetch(field) { fail "source must include '#{field}'" }
       end

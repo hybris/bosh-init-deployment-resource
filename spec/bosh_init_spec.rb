@@ -24,7 +24,9 @@ describe BoshInitDeploymentResource::CommandRunner do
 
     it 'routes all output to stderr' do
       pid = 7223
+      # rubocop:disable Style/SpecialGlobalVars
       expect($?).to receive(:success?).and_return(true)
+      # rubocop:enable Style/SpecialGlobalVars
       expect(Process).to receive(:wait).with(pid)
       expect(Process).to receive(:spawn)
         .with({}, 'echo "hello"', out: :err, err: :err).and_return(pid)

@@ -56,7 +56,9 @@ module BoshInitDeploymentResource
     def run(command, env = {}, opts = {})
       pid = Process.spawn(env, command, { out: :err, err: :err }.merge(opts))
       Process.wait(pid)
+      # rubocop:disable Style/SpecialGlobalVars
       fail "command '#{command}' failed!" unless $?.success?
+      # rubocop:enable Style/SpecialGlobalVars
     end
   end
 end

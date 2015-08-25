@@ -1,13 +1,13 @@
 #!/usr/bin/env ruby
 
-require "json"
+require 'json'
 
-require 'bosh-init_deployment_resource'
+require 'bosh_init_deployment_resource'
 
 working_dir = ARGV[0]
 request = JSON.parse(STDIN.read)
 
-command = BoshInitDeploymentResource::OutCommand.new()
+command = BoshInitDeploymentResource::OutCommand.new
 
 begin
   command.run(working_dir, request)
