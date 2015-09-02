@@ -1,6 +1,0 @@
----
-name: bosh-init
-templates: {}
-
-packages:
-- bosh-init
