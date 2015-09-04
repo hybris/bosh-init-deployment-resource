@@ -5,6 +5,10 @@ Gem::Specification.new do |spec|
   spec.version       = '0.0.1'
   spec.summary       = 'a gem for things'
   spec.authors       = ['Johannes Engelke']
+  spec.email         = 'johannes.engelke@hybris.com'
+  spec.homepage      = 'https://github.com/hybris/bosh-init-deployment-resource'
+  spec.description   = 'Much longer explanation of the example!'
+  spec.license       = ''
 
   spec.files         = Dir.glob('{lib,bin}/**/*')
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
@@ -14,6 +18,6 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'bundler', '~> 1.10'
   spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'simplecov'
-  spec.add_development_dependency 'rubocop'
+  spec.add_development_dependency 'simplecov', '~> 0'
+  spec.add_development_dependency 'rubocop', '~> 0'
 end

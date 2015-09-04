@@ -59,8 +59,8 @@ DEPENDENCIES
   bosh_init_deployment_resource!
   bundler (~> 1.10)
   rspec (~> 3.0)
-  rubocop
-  simplecov
+  rubocop (~> 0)
+  simplecov (~> 0)
 
 BUNDLED WITH
    1.10.6
