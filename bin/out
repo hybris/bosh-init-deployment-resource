@@ -1,0 +1,8 @@
+#!/bin/bash
+
+
+env
+
+gem env
+
+bdr_out
