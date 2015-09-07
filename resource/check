@@ -1,0 +1,11 @@
+#!/bin/bash
+
+export GEM_HOME=/usr/local/bundle
+export BUNDLE_APP_CONFIG=/usr/local/bundle
+export PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+export RUBY_MAJOR=2.2
+export RUBY_VERSION=2.2.1
+
+
+
+bdr_check

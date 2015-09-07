@@ -1,0 +1,18 @@
+#!/bin/bash
+
+echo "Run wrapper"
+
+
+export GEM_HOME=/usr/local/bundle
+export BUNDLE_APP_CONFIG=/usr/local/bundle
+PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+RUBY_MAJOR=2.2
+RUBY_VERSION=2.2.1
+
+
+>&2 env
+
+>&2 gem env
+>&2 which gem
+>&2 which ruby
+bdr_out
