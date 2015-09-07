@@ -1,8 +1,11 @@
 #!/bin/bash
 
+echo "Run wrapper"
 
-env
+>&2 env
 
-
-
+>&2 gem env
+>&2 which gem
+>&2 which ruby
+>&2 bdr_out
 bdr_out
