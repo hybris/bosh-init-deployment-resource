@@ -19,10 +19,13 @@ module BoshInitDeploymentResource
 
     def status
       unless @status
-        status = download_object_from_s3
-        if status
+        print 'Download status from s3.'
+        @status = download_object_from_s3
+        if @status
+          print 'Found status'
           return status.body.string
         else
+          print 'No status available'
           return nil
         end
       end
