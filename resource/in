@@ -6,4 +6,4 @@ export PATH=/usr/local/bundle/bin:$PATH
 export RUBY_MAJOR=2.2
 export RUBY_VERSION=2.2.1
 
-bdr_in
+bdr_in $1

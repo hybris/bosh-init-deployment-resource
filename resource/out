@@ -14,4 +14,4 @@ pwd
 ls -l bosh-init-manifests/idefixoperationsinfratest-deploymenttest/
 ls -l bosh-init-manifests/
 
-bdr_out
+bdr_out $1

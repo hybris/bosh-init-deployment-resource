@@ -8,4 +8,4 @@ export RUBY_VERSION=2.2.1
 
 
 
-bdr_check
+bdr_check $1
