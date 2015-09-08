@@ -9,9 +9,9 @@ export PATH=/usr/local/bundle/bin:$PATH
 export RUBY_MAJOR=2.2
 export RUBY_VERSION=2.2.1
 
-ls -l
+ls -l $1
 pwd
-ls -l bosh-init-manifests/idefixoperationsinfratest-deploymenttest/
-ls -l bosh-init-manifests/
+ls -l $1/bosh-init-manifests/idefixoperationsinfratest-deploymenttest/
+ls -l $1/bosh-init-manifests/
 
 bdr_out $1
