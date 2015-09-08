@@ -9,10 +9,4 @@ export PATH=/usr/local/bundle/bin:$PATH
 export RUBY_MAJOR=2.2
 export RUBY_VERSION=2.2.1
 
-
->&2 env
-
->&2 gem env
->&2 which gem
->&2 which ruby
 bdr_out
