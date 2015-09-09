@@ -11,19 +11,27 @@ module BoshInitDeploymentResource
       validate! request
       unless stats
         stats = BoshStats.new(
-          credentials(request),
-          request.fetch('source').fetch('bucket_name'),
+          credentials(request), request.fetch('source').fetch('bucket_name'),
           request.fetch('params').fetch('stats_file_key'),
           request.fetch('source').fetch('region', 'us-east-1'), @ops)
       end
       deploy("#{working_dir}/#{manifest_file(request)}",
              "#{working_dir}/#{key_file(request)}", stats)
-      manifest_sha = Digest::SHA1
-                     .file("#{working_dir}/#{manifest_file(request)}").hexdigest
-      { 'version' => manifest_sha }
+      result
     end
 
     private
+
+    def result
+      manifest_sha = Digest::SHA1
+                     .file("#{working_dir}/#{manifest_file(request)}").hexdigest
+      {
+        'version' => {
+          'manifest_sha1' => manifest_sha
+        },
+        'metadata' => []
+      }
+    end
 
     def validate!(request)
       %w(access_key_id secret_access_key bucket_name region).each do |field|
