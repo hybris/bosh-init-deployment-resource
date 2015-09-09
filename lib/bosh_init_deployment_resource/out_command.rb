@@ -14,8 +14,7 @@ module BoshInitDeploymentResource
           credentials(request),
           request.fetch('source').fetch('bucket_name'),
           request.fetch('params').fetch('stats_file_key'),
-          request.fetch('source').fetch('region', 'us-east-1'),
-          @ops)
+          request.fetch('source').fetch('region', 'us-east-1'), @ops)
       end
       deploy("#{working_dir}/#{manifest_file(request)}",
              "#{working_dir}/#{key_file(request)}", stats)

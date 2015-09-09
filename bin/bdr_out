@@ -15,3 +15,5 @@ rescue => e
   STDERR.puts e.message
   exit 1
 end
+
+puts [].to_json
