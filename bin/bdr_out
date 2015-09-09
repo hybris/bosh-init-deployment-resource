@@ -10,7 +10,9 @@ request = JSON.parse(STDIN.read)
 command = BoshInitDeploymentResource::OutCommand.new
 
 begin
-  puts command.run(working_dir, request).to_json
+  result = command.run(working_dir, request).to_json
+  STDERR.puts result
+  puts result
 rescue => e
   STDERR.puts e.message
   exit 1
