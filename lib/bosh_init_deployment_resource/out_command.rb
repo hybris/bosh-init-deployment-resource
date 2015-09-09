@@ -17,14 +17,14 @@ module BoshInitDeploymentResource
       end
       deploy("#{working_dir}/#{manifest_file(request)}",
              "#{working_dir}/#{key_file(request)}", stats)
-      result
+      result("#{working_dir}/#{manifest_file(request)}")
     end
 
     private
 
-    def result
+    def result(manifest)
       manifest_sha = Digest::SHA1
-                     .file("#{working_dir}/#{manifest_file(request)}").hexdigest
+                     .file(manifest).hexdigest
       {
         'version' => {
           'manifest_sha1' => manifest_sha
