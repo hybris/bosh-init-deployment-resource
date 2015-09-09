@@ -23,7 +23,6 @@ module BoshInitDeploymentResource
         if @status
           return status.body.string
         else
-          print 'No status available\n'
           return nil
         end
       end
