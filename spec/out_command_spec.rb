@@ -11,6 +11,10 @@ describe 'OutCommand' do
     File.open(manifest, 'w') { |file| file.write('your text') }
   end
 
+  def add_key(key)
+    File.open(key, 'w') { |file| file.write('your text') }
+  end
+
   let(:request) do
     {
       'source' => {
@@ -42,6 +46,7 @@ describe 'OutCommand' do
     it 'get stats' do
       in_dir do |working_dir|
         add_manifest("#{working_dir}/manifest.yml")
+        add_key("#{working_dir}/microbosh.pem")
 
         allow(command_runner).to receive(:run)
         expect(stats).to receive(:status).and_return('Test')
@@ -59,9 +64,11 @@ describe 'OutCommand' do
     it 'run deployment' do
       in_dir do |working_dir|
         add_manifest("#{working_dir}/manifest.yml")
+        add_key("#{working_dir}/microbosh.pem")
 
         expect(bosh).to receive(:setup_environment)
-          .with("#{working_dir}/manifest.yml", '')
+          .with("#{working_dir}/manifest.yml",
+                "#{working_dir}/microbosh.pem", '')
         expect(bosh).to receive(:deploy).and_return('Deployed')
         out_command.run(working_dir, request)
       end

@@ -17,7 +17,8 @@ module BoshInitDeploymentResource
           request.fetch('source').fetch('region', 'us-east-1'),
           @ops)
       end
-      deploy("#{working_dir}/#{manifest_file(request)}", stats)
+      deploy("#{working_dir}/#{manifest_file(request)}",
+             "#{working_dir}/#{key_file(request)}", stats)
     end
 
     private
@@ -44,9 +45,14 @@ module BoshInitDeploymentResource
       request.fetch('params').fetch('manifest_file', 'manifest.yml')
     end
 
-    def deploy(manifest_path, stats)
+    def key_file(request)
+      request.fetch('params').fetch('key_file', 'microbosh.pem')
+    end
+
+    def deploy(manifest_path, key_path, stats)
       @bosh.setup_environment(
         manifest_path,
+        key_path,
         stats.status
       )
       stats.status = @bosh.deploy

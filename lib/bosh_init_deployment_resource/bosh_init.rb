@@ -19,7 +19,7 @@ module BoshInitDeploymentResource
       state
     end
 
-    def setup_environment(manifest_path, status, dir = Dir.mktmpdir)
+    def setup_environment(manifest_path, key_path, status, dir = Dir.mktmpdir)
       @env_path = dir
       if status
         File.open("#{@env_path}/manifest-state.json", 'w') do |file|
@@ -28,6 +28,7 @@ module BoshInitDeploymentResource
       end
 
       FileUtils.cp(manifest_path, "#{@env_path}/manifest.yml")
+      FileUtils.cp(key_path, "#{@env_path}/#{File.basename(key_path)}")
     end
 
     def cleanup_environment

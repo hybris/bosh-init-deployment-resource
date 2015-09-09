@@ -29,6 +29,8 @@ Run ```bosh-init``` using the provided manifest file.
 
 * `manifest_file`: *Required.* Path to manifest file, which will be deployed by bosh-init.
 
+* `key_file`: *Required.* Path to key file, used in the manifest.
+
 ## Deploy with BOSH
 
 See [bosh-init-deployment-resource-boshrelease](https://github.com/hybris/bosh-init-deployment-resource-boshrelease) for a BOSH release and instructions for integrating this resource into your Concourse via BOSH.
