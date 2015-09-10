@@ -28,8 +28,7 @@ module BoshInitDeploymentResource
       {
         'version' => {
           'manifest_sha1' => manifest_sha
-        },
-        'metadata' => []
+        }
       }
     end
 
