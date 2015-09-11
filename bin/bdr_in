@@ -2,12 +2,12 @@
 
 require 'json'
 
-require 'bosh_deployment_resource'
+require 'bosh_init_deployment_resource'
 
 working_dir = ARGV[0]
 request = JSON.parse(STDIN.read)
 
-command = BoshDeploymentResource::InCommand.new
+command = BoshInitDeploymentResource::InCommand.new
 
 begin
   command.run(working_dir, request)
