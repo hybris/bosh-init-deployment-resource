@@ -7,9 +7,9 @@ The worker, where the resource is running, have to have direct network access to
 
 ## Source Configuration
 
-* `access_key_id`: *Required.* AWS access key ID to access the bucket.
-* `secret_access_key`: *Required.* AWS access key secret to access the bucket.
-* `bucket_name`: *Required.* Bucket, where stats file is stored.
+* `access_key_id`: *Required.* AWS access key ID to access the S3 bucket to store current deployment stat.
+* `secret_access_key`: *Required.* AWS access key secret to access the s3 bucket to store current deployment stat.
+* `bucket_name`: *Required.* S3 Bucket, where stats file is stored.
 * `region`: AWS S3 region.
 
 
@@ -30,6 +30,30 @@ Run ```bosh-init``` using the provided manifest file.
 * `manifest_file`: *Required.* Path to manifest file, which will be deployed by bosh-init.
 
 * `key_file`: *Required.* Path to key file, used in the manifest.
+
+## Example
+
+```yaml
+resources:
+- name: bosh-init
+  type: bosh-init-deployment
+  source:
+    access_key_id: {{bosh-init-aws-access-key-id}}
+    secret_access_key: {{bosh-init-aws-secret-access-key}}
+    bucket_name: {{bosh-init-aws-bucket}}
+    region: us-east-1
+```
+
+```yaml
+jobs:
+  - name: deploy
+    plan:
+    - put: bosh-init
+      params:
+        stats_file_key: current-deployment
+        manifest_file: manifest/current-deployment/manifest.yml
+        key_file: manifest/current-deployment/microbosh.pem
+```
 
 ## Deploy with BOSH
 
