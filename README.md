@@ -3,14 +3,14 @@
 A resource to deploy [bosh-init](http://bosh.io) manifests. The current deployment status will be stored in AWS S3.
 
 ## Requirements
-The worker, where the resource is running, have to have direct network access to the deployed boxes. ```bosh-init``` will try to connect to the VM's using ports ```22``` and ```6868```.
+The worker, where the resource is running, has to have direct network access to the deployed boxes. ```bosh-init``` will try to connect to the VM's using ports ```22``` and ```6868```.
 
 ## Source Configuration
 
 * `access_key_id`: *Required.* AWS access key ID to access the bucket.
 * `secret_access_key`: *Required.* AWS access key secret to access the bucket.
 * `bucket_name`: *Required.* Bucket, where stats file is stored.
-* `region`: AWS S3 region.
+* `region`: *Required.* AWS S3 region.
 
 
 ## Behavior
