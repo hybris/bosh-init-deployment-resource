@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 
 # Install bosh-init
 RUN \
-  wget https://s3.amazonaws.com/bosh-init-artifacts/bosh-init-0.0.77-linux-amd64 && \
+  wget https://s3.amazonaws.com/bosh-init-artifacts/bosh-init-0.0.81-linux-amd64 && \
   mv bosh-init-* /usr/local/bin/bosh-init && \
   chmod a+x /usr/local/bin/bosh-init
 
