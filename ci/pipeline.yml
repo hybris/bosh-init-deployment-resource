@@ -1,0 +1,114 @@
+
+
+jobs:
+  - name: unit-test
+    public: true
+    serial: true
+    plan:
+      - do:
+        - aggregate:
+          - get: bosh-init-deployment-resource
+            resource: git-resource
+            trigger: true
+        - task: run-build-plan
+          file: bosh-init-deployment-resource/ci/tasks/build.yml
+
+  - name: rc
+    public: true
+    plan:
+      - aggregate:
+        - get: git-resource
+          passed: [unit-test]
+          trigger: true
+        - get: version
+          trigger: false
+          params: {bump: minor, pre: rc}
+      - put: version
+        params: {file: version/number}
+
+  - name: build-docker-resource-image
+    public: true
+    plan:
+      - aggregate:
+        - get: bosh-init-deployment-resource
+          resource: git-resource
+          passed: [unit-test]
+          trigger: true
+        - get: version
+          trigger: false
+          params: {bump: final}
+      - aggregate:
+        - put: version
+          params: {file: version/number}
+        - put: resource-image
+          params:
+            build: bosh-init-deployment-resource
+        - put: git-release-final
+          params:
+            name: version/number
+            tag: version/number
+
+  - name: patch
+    public: true
+    plan:
+      - aggregate:
+        - get: version
+          trigger: false
+          params: {bump: patch}
+      - put: version
+        params: {file: version/number}
+
+  - name: minor
+    public: true
+    plan:
+      - aggregate:
+        - get: version
+          trigger: false
+          params: {bump: minor}
+      - put: version
+        params: {file: version/number}
+
+  - name: major
+    public: true
+    plan:
+      - aggregate:
+        - get: version
+          trigger: false
+          params: {bump: major}
+      - put: version
+        params: {file: version/number}
+
+
+
+
+resources:
+  - name: version
+    type: semver
+    source:
+      key: current-version
+      bucket: {{pipeline-aws-bucket}}
+      access_key_id: {{pipeline-aws-access-key-id}}
+      secret_access_key: {{pipeline-aws-secret-access-key}}
+      initial_version: 0.0.0
+
+  - name: git-resource
+    type: git
+    source:
+      uri: {{resource-git-repo}}
+      branch: {{resource-git-branch}}
+
+  - name: git-release-final
+    type: github-release
+    source:
+      user: hybris
+      repository: bosh-init-deployment-resource
+      access_token: {{github-access-token}}
+
+  # docker image for building the resource
+  - name: resource-image
+    type: docker-image
+    source:
+      email: {{docker-hub-email}}
+      username: {{docker-hub-username}}
+      password: {{docker-hub-password}}
+      repository: {{docker-create-hub-resource-image}}
