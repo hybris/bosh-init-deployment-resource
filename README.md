@@ -7,6 +7,16 @@ The worker, where the resource is running, have to have direct network access to
 
 ## Source Configuration
 
+Before the resource can be used it has to be registered in the pipeline as a resource type.
+
+```
+resource_types:
+- name: bosh-init-deployment
+  type: docker-image
+  source:
+    repository: teamidefix/bosh-init-deployment-resource
+```
+
 * `access_key_id`: *Required.* AWS access key ID to access the S3 bucket to store current deployment stat.
 * `secret_access_key`: *Required.* AWS access key secret to access the s3 bucket to store current deployment stat.
 * `bucket_name`: *Required.* S3 Bucket, where stats file is stored.
@@ -54,7 +64,3 @@ jobs:
         manifest_file: manifest/current-deployment/manifest.yml
         key_file: manifest/current-deployment/microbosh.pem
 ```
-
-## Deploy with BOSH
-
-See [bosh-init-deployment-resource-boshrelease](https://github.com/hybris/bosh-init-deployment-resource-boshrelease) for a BOSH release and instructions for integrating this resource into your Concourse via BOSH.
