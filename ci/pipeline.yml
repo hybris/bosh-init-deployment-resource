@@ -1,4 +1,14 @@
-
+groups:
+- name: build
+  jobs:
+  - unit-test
+  - rc
+  - build-docker-resource-image
+- name: version
+  jobs:
+  - patch
+  - minor
+  - major
 
 jobs:
   - name: unit-test
@@ -32,10 +42,11 @@ jobs:
       - aggregate:
         - get: bosh-init-deployment-resource
           resource: git-resource
-          passed: [unit-test]
-          trigger: true
+          passed: [rc]
+          trigger: false
         - get: version
           trigger: false
+          passed: [rc]
           params: {bump: final}
       - aggregate:
         - put: version

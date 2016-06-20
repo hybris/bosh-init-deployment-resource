@@ -3,7 +3,7 @@
 set -e
 
 TARGET=${TARGET:-"sap"}
-PIPELINE_NAME=${PIPELINE_NAME:-"bosh-init-deployment-resource-boshrelease"}
+PIPELINE_NAME=${PIPELINE_NAME:-"bosh-init-deployment-resource"}
 
 if ! [ -x "$(command -v spruce)" ]; then
   echo 'spruce is not installed. Please download at https://github.com/geofffranks/spruce/releases' >&2
