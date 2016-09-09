@@ -2,7 +2,7 @@
 
 set -e
 
-TARGET=${TARGET:-"sap"}
+TARGET=${TARGET:-"hybris"}
 PIPELINE_NAME=${PIPELINE_NAME:-"bosh-init-deployment-resource"}
 
 if ! [ -x "$(command -v spruce)" ]; then
@@ -13,7 +13,7 @@ if ! [ -x "$(command -v fly)" ]; then
   echo 'fly is not installed.' >&2
 fi
 
-CREDENTIALS=$(mktemp /tmp/pipeline.XXXXX)
+CREDENTIALS=$(mktemp /tmp/credentials.XXXXX)
 
 pull_credentials bosh-init-deployment-resource concourse credentials.yml.erb ${CREDENTIALS}
 
@@ -21,3 +21,5 @@ fly -t ${TARGET} set-pipeline -c pipeline.yml --load-vars-from=${CREDENTIALS} --
 if [ $? -ne 0 ]; then
   echo "Please login first: fly -t ${TARGET} login -k"
 fi
+
+rm -f ${CREDENTIALS}
