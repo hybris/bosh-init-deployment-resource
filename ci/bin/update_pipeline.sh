@@ -15,7 +15,7 @@ fi
 
 CREDENTIALS=$(mktemp /tmp/credentials.XXXXX)
 
-pull_credentials bosh-init-deployment-resource concourse credentials.yml.erb ${CREDENTIALS}
+vault read -field=value -tls-skip-verify secret/concourse/bosh-init-deployment-resource > ${CREDENTIALS}
 
 fly -t ${TARGET} set-pipeline -c pipeline.yml --load-vars-from=${CREDENTIALS} --pipeline=${PIPELINE_NAME}
 if [ $? -ne 0 ]; then
